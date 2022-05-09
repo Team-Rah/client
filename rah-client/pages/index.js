@@ -5,12 +5,19 @@ import Navbar from '../components/Navbar/Navbar';
 import React, { useState, useEffect } from "react";
 import { activeUsers } from '../pages/_sampleData/activeUsers';
 import ActiveUsersList from '../components/ActiveUsersList';
+import { useRecoilValue } from 'recoil';
+import { jwtState } from '../_states/tokenState';
 
 export default function Home() {
+
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [activeList, setActiveList] = useState([]);
+
+  const jwtToken = useRecoilValue(jwtState);
+
+  console.log(jwtToken, 'jwtToken');
 
   useEffect(() => {
     let mounted = true;
