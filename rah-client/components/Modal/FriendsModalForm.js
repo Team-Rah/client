@@ -28,33 +28,32 @@ export default function FriendsModalForm() {
   const onSubmitForm = (e) => {
     e.preventDefault();
     console.log(message);
+
+    setMessage('');
   };
   return (
     <>
       <Box sx={style}>
         <FriendName>FRIEND NAME HERE</FriendName>
-        <List style={{ marginTop: '1em', maxHeight: '200px', overflow: 'auto' }}>
+        <StyledChatBox>
           DO THE CHATS GO HEREDO THE CHATS GO HEREDO THE CHATS GO HEREDO THE CHATS GO HEREDO THE
           CHATS GO HEREDO THE CHATS GO HEREDO THE CHATS GO HEREDO THE CHATS GO HEREDO THE CHATS GO
           HEREDO THE CHATS GO HEREDO THE CHATS GO HEREDO THE CHATS GO HEREDO THE CHATS GO HEREDO THE
           CHATS GO HEREDO THE CHATS GO HEREDO THE CHATS GO HEREDO THE CHATS GO HEREDO THE CHATS GO
           HEREDO THE CHATS GO HEREDO THE CHATS GO HEREDO THE CHATS GO HERE
-        </List>
+        </StyledChatBox>
         <Form onSubmit={onSubmitForm}>
-          <TextareaAutosize
+          <FormInput
+            value={message}
+            type='text'
             onChange={onChangeForm}
-            style={{ width: '100%', borderRadius: '7px' }}
             placeholder='Message friend name here'
           />
           <input hidden type='submit' />
         </Form>
-        <Button
-          style={{ maxWidth: '75px', maxHeight: '25px', marginTop: '2em' }}
-          size='small'
-          variant='outlined'
-          color='error'>
+        <StyledButton size='small' variant='outlined' color='error'>
           Unfriend
-        </Button>
+        </StyledButton>
       </Box>
     </>
   );
@@ -66,4 +65,24 @@ const FriendName = styled.p`
 
 const Form = styled.form`
   margin-top: 2em;
+`;
+
+const FormInput = styled.input`
+  width: 100%;
+  height: 50px;
+  border-radius: 7px;
+`;
+
+const StyledButton = styled(Button)`
+  max-width: 75px;
+  maxheight: 25px;
+  margintop: 2em;
+`;
+
+const StyledChatBox = styled(List)`
+  border: 1px solid black;
+  margin-top: 1em;
+  max-height: 200px;
+  overflow: auto;
+  padding: 7px;
 `;

@@ -22,22 +22,47 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import FriendsModalForm from '../Modal/FriendsModalForm';
+import Skeleton from '@mui/material/Skeleton';
 const Navbar = () => {
-  const loginClicked = () => {};
+  const loginClicked = () => {
+    handleLoginModal();
+  };
 
-  const signupClicked = () => {};
+  const signupClicked = () => {
+    handleSignupModal();
+  };
+
   //navbar page states based on if user is logged in
   const pagesIfLoggedIn = [, 'Ranking', <Link href='/'>Logout</Link>];
   const pagesIfNotLoggedIn = [
     ,
-    <p onClick={signupClicked}>Sign Up</p>,
-    <p onClick={loginClicked}>Login</p>,
+    <div onClick={signupClicked}>Sign Up</div>,
+    <div onClick={loginClicked}>Login</div>,
   ];
   //handles hamburger menu
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   //modal states
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+  const [signupModal, setSignupModal] = useState(false);
+
+  const handleLoginModal = () => {
+    setLoginModal(true);
+  };
+
+  const handleCloseLoginModal = () => {
+    setLoginModal(false);
+  };
+
+  const handleSignupModal = () => {
+    setSignupModal(true);
+  };
+
+  const handleCloseSignupModal = () => {
+    setSignupModal(false);
+  };
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -49,6 +74,8 @@ const Navbar = () => {
   const [state, setState] = useState({
     left: false,
   });
+  //toggle skeleton
+  const [loading, setLoading] = useState(false);
 
   const toggleDrawer = (anchor, open) => (event) => {
     setState({ ...state, [anchor]: open });
@@ -59,48 +86,75 @@ const Navbar = () => {
       role='presentation'
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}>
-      <List>
-        {/* array of friends for specific user */}
-        {[
-          'Josh',
-          'Cihad',
-          'Tony',
-          'David',
-          'Lauren',
-          'Kyle',
-          'Kyle',
-          'Kyle',
-          'Kyle',
-          'Kyle',
-          'Kyle',
-          'Kyle',
-          'Kyle',
-          'Kyle',
-          'Kyle',
-          'Kyle',
-        ].map((text, index) => (
-          <div key={uuidv4()}>
-            <ListItem>
-              <ListItemIcon>
-                {/* if user.loggedIn is true, show green, else show invisible */}
-                {friendLoggedIn ? (
-                  <Badge overlap='circular' variant='dot' color='success'>
+      {/* //toggle skeleton */}
+      {loading && (
+        <List>
+          {[...Array(20)].map((text) => {
+            return (
+              <div key={uuidv4()}>
+                <ListItem>
+                  <ListItemIcon>
+                    <Skeleton animation='wave' height={40} width={40} variant='circular' />
+                    <Skeleton
+                      style={{ marginLeft: '15px', marginTop: '12px' }}
+                      animation='wave'
+                      width={40}
+                      height={20}
+                      variant='rectangular'
+                    />
+                  </ListItemIcon>
+                </ListItem>
+                <Divider light />
+              </div>
+            );
+          })}
+        </List>
+      )}
+
+      {!loading && (
+        <List>
+          {/* array of friends for specific user */}
+          {[
+            'Josh',
+            'Cihad',
+            'Tony',
+            'David',
+            'Lauren',
+            'Kyle',
+            'Kyle',
+            'Kyle',
+            'Kyle',
+            'Kyle',
+            'Kyle',
+            'Kyle',
+            'Kyle',
+            'Kyle',
+            'Kyle',
+            'Kyle',
+          ].map((text, index) => (
+            <div key={uuidv4()}>
+              <ListItem>
+                <ListItemIcon>
+                  {/* if user.loggedIn is true, show green, else show invisible */}
+                  {friendLoggedIn ? (
+                    <Badge overlap='circular' variant='dot' color='success'>
+                      <IconButton size='small' onClick={avatarClick}>
+                        <Avatar />
+                      </IconButton>
+                    </Badge>
+                  ) : (
                     <IconButton size='small' onClick={avatarClick}>
                       <Avatar />
                     </IconButton>
-                  </Badge>
-                ) : (
-                  <IconButton size='small' onClick={avatarClick}>
-                    <Avatar />
-                  </IconButton>
-                )}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-            <Divider light />
-          </div>
-        ))}
-      </List>
+                  )}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+              <Divider light />
+            </div>
+          ))}
+        </List>
+      )}
     </Box>
   );
 
@@ -150,7 +204,6 @@ const Navbar = () => {
                 WEREWOLF
               </Typography>
             </Link>
-
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size='large'
@@ -268,6 +321,7 @@ const Navbar = () => {
           {list('right')}
         </Drawer>
       </>
+      {/* friends modal */}
       <>
         <Modal
           open={open}
@@ -277,11 +331,29 @@ const Navbar = () => {
           <FriendsModalForm />
         </Modal>
       </>
+      {/* signup modal */}
+      <>
+        <Modal
+          open={signupModal}
+          onClose={handleCloseSignupModal}
+          aria-labelledby='modal-modal-title'
+          aria-describedby='modal-modal-description'>
+          {/* //PUT SIGN UP FORM HERE */}
+          <FriendsModalForm />
+        </Modal>
+      </>
+      {/* login modal */}
+      <>
+        <Modal
+          open={loginModal}
+          onClose={handleCloseLoginModal}
+          aria-labelledby='modal-modal-title'
+          aria-describedby='modal-modal-description'>
+          {/* //PUT LOGIN FORM HERE */}
+          <FriendsModalForm />
+        </Modal>
+      </>
     </>
   );
 };
 export default Navbar;
-
-const StyledButton = styled(MenuItem)`
-  color: white;
-`;
