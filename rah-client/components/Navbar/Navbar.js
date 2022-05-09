@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -18,46 +19,39 @@ import ListItemText from '@mui/material/ListItemText';
 import Badge from '@mui/material/Badge';
 import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import FriendsModalForm from '../Modal/FriendsModalForm';
 const Navbar = () => {
-  //most likely gonna have to change
+  const loginClicked = () => {};
+
+  const signupClicked = () => {};
+  //navbar page states based on if user is logged in
   const pagesIfLoggedIn = [, 'Ranking', <Link href='/'>Logout</Link>];
-  const pagesIfNotLoggedIn = [, 'Sign Up', 'Login'];
+  const pagesIfNotLoggedIn = [
+    ,
+    <p onClick={signupClicked}>Sign Up</p>,
+    <p onClick={loginClicked}>Login</p>,
+  ];
+  //handles hamburger menu
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  //modal states
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  //handling friends
-  //invisible IF not logged in
+  //handling friends states
+  //green dot does not appear if invisible is true
   const [invisible, setInvisible] = useState(true);
   const [loggedIn, setLoggedIn] = useState(true);
-  const [friendLoggedIn, setFriendLoggedIn] = useState(true);
+  const [friendLoggedIn, setFriendLoggedIn] = useState(false);
   const [state, setState] = useState({
     left: false,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
     setState({ ...state, [anchor]: open });
-  };
-
-  const friendsClicked = () => {
-    handleCloseNavMenu();
-    toggleDrawer('right', true)();
-  };
-
-  //make it so modal appears to either send message or delete friend
-  const avatarClick = (e) => {
-    e.stopPropagation();
   };
 
   const list = (anchor) => (
@@ -73,10 +67,6 @@ const Navbar = () => {
           'Tony',
           'David',
           'Lauren',
-          'Kyle',
-          'Kyle',
-          'Kyle',
-          'Kyle',
           'Kyle',
           'Kyle',
           'Kyle',
@@ -113,6 +103,29 @@ const Navbar = () => {
       </List>
     </Box>
   );
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const friendsClicked = () => {
+    handleCloseNavMenu();
+    toggleDrawer('right', true)();
+  };
+
+  //make it so modal appears to either send message or delete friend
+  const avatarClick = (e) => {
+    e.stopPropagation();
+    handleOpen();
+  };
 
   return (
     <>
@@ -227,7 +240,6 @@ const Navbar = () => {
                     </MenuItem>
                   ))}
             </Box>
-
             <Box sx={{ flexGrow: 0 }}>
               <IconButton sx={{ p: 0 }}>
                 {loggedIn && <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />}
@@ -256,7 +268,20 @@ const Navbar = () => {
           {list('right')}
         </Drawer>
       </>
+      <>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='modal-modal-title'
+          aria-describedby='modal-modal-description'>
+          <FriendsModalForm />
+        </Modal>
+      </>
     </>
   );
 };
 export default Navbar;
+
+const StyledButton = styled(MenuItem)`
+  color: white;
+`;
