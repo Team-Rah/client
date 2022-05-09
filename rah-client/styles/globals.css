@@ -45,6 +45,13 @@ a {
 
 .activeUsers-username, .activeUsers-rank {
   display: inline;
+  align-self: center;
+}
+
+.userAvatar {
+  border-radius: 999px;
+  height: 35px;
+  width: 35px;
 }
 
 #video-container {

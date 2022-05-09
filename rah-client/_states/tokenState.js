@@ -8,8 +8,8 @@ const jwtState = atom({
 const userTokenState = selector({
   key: 'userTokenState',
   get: ({get}) => {
-    const userToken = get(jwtState);
-    return userToken;
+    const token = get(jwtState);
+    return token;
   }
 });
 
