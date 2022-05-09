@@ -69,7 +69,7 @@ const Navbar = () => {
   //handling friends states
   //green dot does not appear if invisible is true
   const [invisible, setInvisible] = useState(true);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [friendLoggedIn, setFriendLoggedIn] = useState(false);
   const [state, setState] = useState({
     left: false,

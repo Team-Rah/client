@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
@@ -6,10 +7,9 @@ import Button from '@mui/material/Button';
 
 export default function LoginForm() {
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const { register, handleSubmit, formState: { errors }} = useForm();
 
-  const handleSubmit = (e) => {
+  const onSubmit = (data) => {
     axios({
       method: 'post',
       url: '/',
@@ -20,10 +20,12 @@ export default function LoginForm() {
   }
 
   return (
-      <Container maxWidth="sm" id="login-container">
-        <TextField label="Username" variant="standard" name="username" onChange={(e) => setUsername(e.target.value)} />
-        <TextField label="Password" name="password" variant="standard" onChange={(e) => setPassword(e.target.value)}/>
-        <Button variant="standard" sx={{ color: '#413C39' }} size="medium" onClick={(e) => handleSubmit(e)}>Login</Button>
-      </Container>
+      <form onSubmit={handleSubmit(onSubmit)} maxWidth="sm" id="login-container">
+        <TextField placeholder="Username" {...register("username", { required: true })} />
+        {errors.username && <span style={{color: 'red'}}>Enter a valid username</span>}
+        <TextField placeholder="Password" {...register("password", { required: true })} />
+        {errors.password && <span style={{color: 'red'}}>Enter a valid password</span>}
+        <Button type="submit" sx={{ color: '#413C39' }} size="medium">Login</Button>
+      </form>
   )
 }
