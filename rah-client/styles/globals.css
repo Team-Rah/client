@@ -26,16 +26,26 @@ a {
 }
 
 #activeUsers-container {
-  width: 25%;
+  width: 45%;
   height: 100vh;
 }
 
+#activeUsersList-container {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+}
+
 .activeUser-item {
-  padding: 3px;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 4%;
-  min-width: 200px;
+  /* display + justify-content are applied inline due to selector specificities  */
+  /* display: flex;
+  justify-content: space-between; */
+  margin: 3%;
+  width: 50%;
+}
+
+.activeUsers-username, .activeUsers-rank {
+  display: inline;
 }
 
 #video-container {
