@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import SocketContext from '../../socket/socket.js'
 export default function ChatForm() {
+
+  //const socket = useContext(SocketContext)
   const [chatBoxInput, setChatBoxInput] = useState('');
 
   const chatBoxOnChange = (e) => {
@@ -10,8 +13,14 @@ export default function ChatForm() {
   const onFormSubmit = (e) => {
     e.preventDefault();
     console.log(chatBoxInput);
+    //sends message, second argument is use object, message is message to be sent
+    socket.emit('send-message', user, message)
     setChatBoxInput('');
   };
+
+  useEffect(() => {
+
+  })
 
   return (
     <Form onSubmit={onFormSubmit}>
