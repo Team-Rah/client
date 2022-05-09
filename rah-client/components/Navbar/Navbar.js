@@ -23,6 +23,8 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import FriendsModalForm from '../Modal/FriendsModalForm';
 import Skeleton from '@mui/material/Skeleton';
+import LoginForm from '../LoginForm';
+import SignupForm from '../SignupForm';
 const Navbar = () => {
   const loginClicked = () => {
     handleLoginModal();
@@ -338,8 +340,7 @@ const Navbar = () => {
           onClose={handleCloseSignupModal}
           aria-labelledby='modal-modal-title'
           aria-describedby='modal-modal-description'>
-          {/* //PUT SIGN UP FORM HERE */}
-          <FriendsModalForm />
+          <SignupForm />
         </Modal>
       </>
       {/* login modal */}
@@ -349,8 +350,7 @@ const Navbar = () => {
           onClose={handleCloseLoginModal}
           aria-labelledby='modal-modal-title'
           aria-describedby='modal-modal-description'>
-          {/* //PUT LOGIN FORM HERE */}
-          <FriendsModalForm />
+          <LoginForm />
         </Modal>
       </>
     </>
