@@ -43,7 +43,8 @@ a {
   width: 50%;
 }
 
-.activeUsers-username, .activeUsers-rank {
+.activeUsers-username,
+.activeUsers-rank {
   display: inline;
   align-self: center;
 }
@@ -102,7 +103,6 @@ a {
 #gameBoard-container {
   border: 1px solid black;
   height: 60%;
-  margin-top: 3.5em;
 }
 
 #gameChat-container {
