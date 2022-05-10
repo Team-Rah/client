@@ -24,35 +24,47 @@ a {
   max-height: 100%;
 }
 
+/* activeUsersList.js */
 #activeUsers-container {
-  width: 45%;
+  width: 35%;
   height: 100vh;
+  overflow-y: scroll;
+  /* hides the scrollbar in IE, Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+/* hides the scrollbar on Chrome/Safari */
+#activeUsers-container::-webkit-scrollbar {
+  display: none;
 }
 
 #activeUsersList-container {
-  width: 100%;
-  height: 100vh;
+  width: 200px;
+  border: 1px solid #9A8249;
+  margin: 5px;
+  padding: 3px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-between;
   text-align: center;
 }
 
-.activeUser-item {
-  /* display + justify-content are applied inline due to selector specificities  */
-  /* display: flex;
-  justify-content: space-between; */
-  margin: 3%;
-  width: 50%;
-}
-
-.activeUsers-username,
-.activeUsers-rank {
-  display: inline;
-  align-self: center;
+.activeUsers-username, .activeUsers-rank {
+  display: inline-flex;
+  align-items: center;
 }
 
 .userAvatar {
   border-radius: 999px;
   height: 35px;
   width: 35px;
+  text-align: center;
+  background-color: #9a824991;
+  padding-top: 7px;
+}
+
+.userName {
+  margin: 5px;
 }
 
 #video-container {
