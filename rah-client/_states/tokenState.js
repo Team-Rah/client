@@ -9,6 +9,7 @@ const userState = atom({
 const userTokenState = selector({
   key: 'userTokenState',
   get: ({get}) => {
+
     const token = get(userState.token);
     return token;
   }
