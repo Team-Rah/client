@@ -129,7 +129,6 @@ a {
 #login-container {
   display: flex;
   flex-direction: column;
-  max-width: 35%;
 }
 
 #signup-container {
@@ -138,3 +137,8 @@ a {
   max-width: 500px;
 }
 
+.formValidation-error {
+  color: red;
+  font-size: 0.75em;
+  text-align: left;
+}

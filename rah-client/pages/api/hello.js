@@ -1,8 +1,4 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-import { useRecoilState } from 'recoil';
-import { jwtState } from '../../_states/tokenState';
-
 export default function handler(req, res) {
 
   if (req.method.toUpperCase() === 'POST') {

@@ -1,16 +1,17 @@
 const { atom, selector } = require('recoil');
+const uuid = require('uuid');
 
-const jwtState = atom({
+const userState = atom({
   key: 'tokenState',
-  default: ''
+  default: {id: '', token: '', userName: `Guest ${uuid.v1().slice(0, 5)}`}
 });
 
 const userTokenState = selector({
   key: 'userTokenState',
   get: ({get}) => {
-    const token = get(jwtState);
+    const token = get(userState.token);
     return token;
   }
 });
 
-export { jwtState, userTokenState }
+export { userState, userTokenState }
