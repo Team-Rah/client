@@ -26,9 +26,10 @@ a {
 
 /* activeUsersList.js */
 #activeUsers-container {
-  width: 35%;
+  width: 45%;
   height: 100vh;
   overflow-y: scroll;
+  margin: 0;
   /* hides the scrollbar in IE, Firefox */
   -ms-overflow-style: none;
   scrollbar-width: none;
