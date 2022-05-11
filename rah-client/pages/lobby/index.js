@@ -28,13 +28,17 @@ export default function Lobby() {
     setValue(newValue);
   };
   //const socket = useContext(SocketContext)
+
   const [games, setGames] = useState([sampleGame]);
+
   useEffect(() => {
     // socket.on('connect', (() => {
     //   socket.emit('gg', 'sting')
     // }))
+
   }, []);
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
 
   return (
     <Container maxWidth={false} disableGutters={true}>
