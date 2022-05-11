@@ -18,27 +18,13 @@ export default function LobbyChatRoom() {
 
   const socket = useContext(SocketContext);
 
-  //put where online players are.
   useEffect(() => {
-    // socket.on('joined-lobby', (user) => {
-    //   console.log('user', user);
-    // });
-
     socket.on("receive-message-lobby", (user, message) => {
       console.log(user);
-      // message = {user:}
       setMessages([...messages, message]);
     });
   });
-  //socket.on('lobby-message-recieved', { username: 'josh' })
-  //building up message to display
-  // useEffect(() => {
-  //   socket.on('receive-message', (user, msg) => {
-  //     const copyChat = [...chats]
-  //     copyChat.push({user, msg})
-  //     setChats(copyChat)
-  //   })
-  // })
+
   const alignMessage = (message) => {
     if (message.username === userData.userName) {
       return "chatMessage-right";
@@ -48,39 +34,6 @@ export default function LobbyChatRoom() {
   };
 
   return (
-    // <StyledChatBox id="chatMessages-container">
-    //   {messages.map((message) => {
-    //     console.log(message)
-    //     return <div className="chatMessage">{message.username}: {message.text}</div>
-    //   })}
-    // </StyledChatBox>
-
-    // <StyledChatBox disableGutters={true} maxWidth={false} id="chatList-container">
-    //   <StyledBox>
-    //     <Typography
-    //       variant="h6"
-    //       noWrap
-    //       component="p"
-    //       sx={{
-    //         fontFamily: 'monospace',
-    //         fontWeight: 700,
-    //         letterSpacing: '.3rem',
-    //         color: 'inherit',
-    //         textDecoration: 'none'
-    //       }}>
-    //       CHAT
-    //       </Typography>
-    //   </StyledBox>
-    //   <div style={{display: 'flex', flexDirection: 'column'}}>
-    //     <List id="chatList">
-    //     {messages.map((message) => {
-    //       console.log(message)
-    //       return <ListItem key={JSON.stringify(message)} sx={{boxShadow: 1}} className={`chatMessage ${alignMessage(message)}`}><ListItemText secondary={`${message.username}: ${message.text}`}/></ListItem>
-    //     })}
-    //     </List>
-    //   </div>
-    // </StyledChatBox>
-
     <StyledChatBox
       disableGutters={true}
       maxWidth={false}

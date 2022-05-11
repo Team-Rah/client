@@ -171,19 +171,21 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
   margin-top: 1em;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
+  height: fit-content;
 }
 .gameInfoDrawer {
   position: "relative";
   transition: "none !important";
 }
 .playerCard {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 200px;
   width: 150px;
-  border: 1px solid black;
+  margin: 5px;
 }
 .playerCardContainer {
   list-style: none;
@@ -194,7 +196,7 @@ a {
   gap: 20px;
 }
 .viewport {
-  height: 200px;
+  height: 250px;
   display: flex;
   width: 750px;
   overflow: hidden;
@@ -219,9 +221,4 @@ a {
   text-align: left;
 }
 
-#login-container {
-  display: flex;
-  flex-direction: column;
-  max-width: 35%;
-}
 
