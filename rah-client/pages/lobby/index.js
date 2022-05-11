@@ -21,6 +21,7 @@ import ActiveUsersList from "../../components/ActiveUsersList";
 import { userState } from '../../_states/tokenState';
 import { useRecoilState } from 'recoil';
 import {SocketContext} from '../../socket/socket';
+import GamesList from '../../components/GamesList.js';
 
 export default function Lobby() {
   const [value, setValue] = useState(0);

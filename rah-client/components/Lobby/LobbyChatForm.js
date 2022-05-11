@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { SocketContext } from '../../socket/socket';
-import {useRecoilState} from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userState } from '../../_states/tokenState';
 import Input from '@mui/material/Input';
 import { shadows } from '@mui/system';
@@ -17,8 +17,8 @@ export default function ChatForm() {
 
   const [user, setUser] = useRecoilState(userState);
   useEffect(() => {
-    console.log(user)
-  }, [])
+    console.log(user);
+  }, []);
 
   const chatBoxOnChange = (e) => {
     setChatBoxInput(e.target.value);
@@ -29,20 +29,18 @@ export default function ChatForm() {
     let message = {
       text: chatBoxInput,
       time: Date.now(),
-      username: user.userName
-    }
-  //
-    socket.emit('send-message', user, message, "lobby");
+      username: user.userName,
+    };
+    //
+    socket.emit('send-message', user, message, 'lobby');
     //sends message, second argument is use object, message is message to be sent
     // socket.emit('send-message', user, message);
     setChatBoxInput('');
   };
-
-  useEffect(() => {
-      // socket.on('recieved-message', (userObj, messageStr) => {
-
-      // })
-  })
+  //sending message
+  // useEffect(() => {
+  //   socket.on('send-message', 'sup', {name: 'josh'}, chatboxInput)
+  // })
 
   return (
     <Form onSubmit={onFormSubmit}>
@@ -51,9 +49,14 @@ export default function ChatForm() {
         placeholder='Send Message'
         onChange={chatBoxOnChange}
         value={chatBoxInput}
-        id="chat-input"
+        id='chat-input'
       />
-      <StyledButton variant="contained" id="submitChat-button" endIcon={<SendIcon />} type='submit' />
+      <StyledButton
+        variant='contained'
+        id='submitChat-button'
+        endIcon={<SendIcon />}
+        type='submit'
+      />
     </Form>
   );
 }
@@ -82,5 +85,4 @@ const StyledButton = styled(Button)`
   background-color: transparent;
   color: #9a824991;
   box-shadow: none;
-
 `;

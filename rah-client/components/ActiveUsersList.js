@@ -9,7 +9,6 @@ import activeUsers from '../pages/_sampleData/activeUsers';
 
 // !! TO DO -> switch from props to users list
 export default function ActiveUsersList() {
-
   const socket = useContext(SocketContext);
   const userData = useRecoilValue(userState);
   const [usersList, setUsersList] = useState([]);
@@ -19,27 +18,26 @@ export default function ActiveUsersList() {
     socket.on('receive-lobby', (users) => {
       setUsersList(users);
       // console.log(users, 'users');
-    })
+    });
     socket.on('error', (err) => {
       console.error(err);
-    })
-  }, [])
+    });
+  }, []);
 
   return (
-    <Container disableGutters={true} maxWidth={false} id="activeUsers-container">
-        {/* {!usersList.length ? <div>No active users</div> : usersList.map((user) => ( */}
-          {activeUsers.map((user) => (
-          <div key={JSON.stringify(user)} className="activeUser-item">
-
-            <div id="activeUsersList-container">
-              <div className="activeUsers-username">
-                <span className="userAvatar">{user.userName[0]}</span>
-                <span className="userName">{user.userName}</span>
-              </div>
-              <span className="activeUsers-rank"> {user.score} </span>
+    <Container disableGutters={true} maxWidth={false} id='activeUsers-container'>
+      {/* {!usersList.length ? <div>No active users</div> : usersList.map((user) => ( */}
+      {activeUsers.map((user) => (
+        <div key={JSON.stringify(user)} className='activeUser-item'>
+          <div id='activeUsersList-container'>
+            <div className='activeUsers-username'>
+              <span className='userAvatar'>{user.userName[0]}</span>
+              <span className='userName'>{user.userName}</span>
             </div>
+            <span className='activeUsers-rank'> {user.score} </span>
           </div>
-        ))}
-      </Container>
-  )
+        </div>
+      ))}
+    </Container>
+  );
 }

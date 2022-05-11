@@ -35,7 +35,7 @@ const Navbar = () => {
     if (userData.userToken) {
       setLoggedIn(true);
     }
-  }, [])
+  }, []);
 
   const loginClicked = () => {
     handleLoginModal();

@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
+import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../_states/tokenState';
 export default function CreateGame() {
   // /blueocean/api/v1/games
-
+  //send token as header to so backend can get id from token
   const [playerName, setPlayerName] = useState('');
   const [players, setPlayers] = useState(0);
   const [gameName, setGameName] = useState('');
+  const creator = useRecoilValue(userState);
+  console.log(creator);
   const nameChange = (e) => {
     setPlayerName(e.target.value);
   };
@@ -21,7 +26,20 @@ export default function CreateGame() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(playerName, players, gameName);
+    const url = 'http://localhost:4030/blueocean/api/v1/games';
+    console.log(players, gameName);
+    axios
+      .post(
+        url,
+        { players, gameName },
+        {
+          headers: {
+            Authorization: `Bearer ${creator.userToken}`,
+          },
+        }
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (
