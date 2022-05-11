@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -25,11 +25,19 @@ import FriendsModalForm from '../Modal/FriendsModalForm';
 import Skeleton from '@mui/material/Skeleton';
 import LoginForm from '../LoginForm';
 import SignupForm from '../SignupForm';
+import { userState } from '../../_states/tokenState';
+import { useRecoilValue } from 'recoil';
+import icon from '../../public/anubis-gold.png';
+import Image from 'next/image';
 
 const Navbar = () => {
-  // useEffect(() => {
+  const userData = useRecoilValue(userState);
 
-  // }, [token])
+  useEffect(() => {
+    if (userData.userToken) {
+      setLoggedIn(true);
+    }
+  }, [])
 
   const loginClicked = () => {
     handleLoginModal();
@@ -190,7 +198,7 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position='static' color='primary'>
+      <AppBar position='static'>
         <Container maxWidth='xl'>
           <Toolbar disableGutters>
             <Link href='/'>
@@ -211,6 +219,7 @@ const Navbar = () => {
                 WEREWOLF
               </Typography>
             </Link>
+            <Image height="65" width="65" src={icon} alt='logo'/>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size='large'

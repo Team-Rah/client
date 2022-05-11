@@ -33,8 +33,9 @@ export default function Home() {
     return <div>Loading...</div>;
   } else {
     return (
-      <>
+      <Container disableGutters={true} maxWidth={false}>
         <Navbar />
+
         <Container maxWidth={false} id='app-container'>
           <ActiveUsersList users={activeList} />
 
@@ -66,7 +67,7 @@ export default function Home() {
             </Container>
           </Container>
         </Container>
-      </>
+      </Container>
     );
   }
 }
