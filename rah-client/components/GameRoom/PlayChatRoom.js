@@ -12,6 +12,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useRouter } from 'next/router';
 
+
 export default function PlayChatRoom({messages}) {
   const userData = useRecoilValue(userState);
 
@@ -61,6 +62,7 @@ export default function PlayChatRoom({messages}) {
     </StyledChatBox>
   );
 }
+
 
 const StyledChatBox = styled(Container)`
   border: 1px solid gray;

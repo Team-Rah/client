@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
@@ -12,6 +13,7 @@ export default function CreateGame() {
   const [playerName, setPlayerName] = useState("");
   const [players, setPlayers] = useState(0);
   const [gameName, setGameName] = useState("");
+
   const creator = useRecoilValue(userState);
   console.log(creator);
   const nameChange = (e) => {
@@ -28,7 +30,7 @@ export default function CreateGame() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    const url = "http://localhost:4030/blueocean/api/v1/games";
+    const url = 'http://localhost:4030/blueocean/api/v1/games';
     console.log(players, gameName);
     axios
       .post(

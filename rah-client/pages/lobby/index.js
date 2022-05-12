@@ -96,3 +96,4 @@ const TabsContainer = styled(Tabs)`
 const StyledTab = styled(Tab)`
   color: #9A8249;
 `;
+
