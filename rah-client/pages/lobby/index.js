@@ -22,10 +22,9 @@ import { userState } from "../../_states/tokenState";
 import { useRecoilState } from "recoil";
 import { SocketContext } from "../../socket/socket";
 import GamesList from "../../components/GamesList.js";
-
+import {useRouter} from 'next/router';
 export default function Lobby() {
-
-
+const router = useRouter();
 
   const [value, setValue] = useState(0);
   const [user, setUser] = useRecoilState(userState);
@@ -33,11 +32,23 @@ export default function Lobby() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const gameCreated = () => {
+    setValue(0)
+  }
+
   const socket = useContext(SocketContext);
 
   const [games, setGames] = useState([]);
 
   useEffect(() => {
+    const localUser = JSON.parse(localStorage.getItem('userToken'))
+    //gate-keep
+    if (user.userToken.length < 1 && !localUser) {
+      router.push('/')
+    } else {
+        setUser(localUser)
+    }
     socket.emit("get-games", games);
     return () => {
       socket.on("receive-games", (games) => {
@@ -74,7 +85,7 @@ export default function Lobby() {
             id="gameDisplay-container"
             style={{ margin: "0" }}
           >
-            {value === 0 ? <GamesList games={games} /> : <CreateGame />}
+            {value === 0 ? <GamesList games={games} /> : <CreateGame handleChange={gameCreated} />}
           </Container>
 
           <Container maxWidth={false} id="lobbyChat-container">

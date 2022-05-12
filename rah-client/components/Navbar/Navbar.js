@@ -26,15 +26,18 @@ import Skeleton from '@mui/material/Skeleton';
 import LoginForm from '../LoginForm';
 import SignupForm from '../SignupForm';
 import { userState } from '../../_states/tokenState';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import LogoIcon from '../../public/anubis-bg.jpg';
 import Image from 'next/Image';
+import {useRouter} from 'next/router';
+import uuid from 'react-uuid';
 
 const Navbar = () => {
-  const userData = useRecoilValue(userState);
-
+  const [userData, setUserData] = useRecoilState(userState);
+  const router = useRouter()
   useEffect(() => {
-    if (userData.userToken) {
+    const localUser = JSON.parse(localStorage.getItem('userToken'))
+    if (userData.userToken || localUser ) {
       setLoggedIn(true);
     }
   }, []);
@@ -46,9 +49,15 @@ const Navbar = () => {
   const signupClicked = () => {
     handleSignupModal();
   };
-
+  const logoutFunc = () => {
+    localStorage.removeItem('userToken')
+    setLoggedIn(false)
+    setUserData({userId: '', userToken: '', userName: `Guest_${uuid().slice(0, 5)}`})
+    router.push('/')
+  }
   //navbar page states based on if user is logged in
-  const pagesIfLoggedIn = [, 'Ranking', <Link href='/'>Logout</Link>];
+  const pagesIfLoggedIn = [, 'Ranking', <div onClick={logoutFunc}>Logout</div>];
+  //const pagesIfLoggedIn = [, 'Ranking', <Link href='/'>Logout</Link>];
   const pagesIfNotLoggedIn = [
     ,
     <div onClick={signupClicked}>Sign Up</div>,
@@ -207,7 +216,6 @@ const Navbar = () => {
                 variant='h6'
                 noWrap
                 component='a'
-                href='/'
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },

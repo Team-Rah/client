@@ -44,6 +44,7 @@ export default function LoginForm() {
       .then((res) => {
         if (res.status === 200) {
           setToken({userId: res.data.user._id, userToken: res.data.token, userName: res.data.user.userName});
+          localStorage.setItem('userToken', JSON.stringify({userId: res.data.user._id, userToken: res.data.token, userName: res.data.user.userName}))
           setSubmitted(true);
         }
       })

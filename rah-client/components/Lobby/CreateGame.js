@@ -7,7 +7,7 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../../_states/tokenState";
 import Container from '@mui/material/Container';
 
-export default function CreateGame() {
+export default function CreateGame({handleChange}) {
   // /blueocean/api/v1/games
   //send token as header to so backend can get id from token
   const [playerName, setPlayerName] = useState("");
@@ -15,7 +15,6 @@ export default function CreateGame() {
   const [gameName, setGameName] = useState("");
 
   const creator = useRecoilValue(userState);
-  console.log(creator);
   const nameChange = (e) => {
     setPlayerName(e.target.value);
   };
@@ -44,6 +43,7 @@ export default function CreateGame() {
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
+     handleChange()
   };
 
   return (

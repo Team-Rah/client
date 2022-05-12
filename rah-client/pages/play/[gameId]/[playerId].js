@@ -70,6 +70,7 @@ export default function Game() {
     }
   };
 
+
   socket.on(`receive-message-${gameId}`, (user, message) => {
     if (user.userName === "announcement") {
       setAnnouncement(message);

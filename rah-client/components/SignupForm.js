@@ -45,6 +45,7 @@ export default function SignupForm(props) {
   } = useForm();
 
   const onSubmit = (data) => {
+    console.log(data)
     axios({ method: "post", url: `${basePath}/users`, data: data })
       .then((res) => {
         if (res.status === 200) {
@@ -54,9 +55,10 @@ export default function SignupForm(props) {
             userName: res.data.user.userName,
           });
           setSubmitted(true);
+          localStorage.setItem('userToken', JSON.stringify({userId: res.data.user._id, userToken: res.data.token, userName: res.data.user.userName}))
         }
       })
-      .catch((err) => err);
+      .catch((err) => console.log('ERR IN SIGN UP'));
   };
 
   return (
