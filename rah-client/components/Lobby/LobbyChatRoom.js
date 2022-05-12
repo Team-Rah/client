@@ -75,6 +75,7 @@ export default function LobbyChatRoom() {
 const StyledChatBox = styled(Container)`
   border: 1px solid gray;
   border-bottom: none;
+  border-radius: 5px 5px 0 0;
   height: 100%;
   overflow-y: scroll;
   width: 100%;

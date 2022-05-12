@@ -12,22 +12,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useRouter } from 'next/router';
 
-export default function PlayChatRoom() {
-  const [chats, setChats] = useState([]);
-  const [messages, setMessages] = useState([]);
+export default function PlayChatRoom({messages}) {
   const userData = useRecoilValue(userState);
-
-  const socket = useContext(SocketContext);
-  const router = useRouter()
-  const {gameId, playerId} = router.query
-
-  useEffect(() => {
-    socket.on(`receive-message-${gameId}`, (user, message) => {
-      console.log(messages, 'messages');
-      
-      setMessages([...messages, message]);
-    });
-  });
 
   const alignMessage = (message) => {
     if (message.username === userData.userName) {
@@ -79,9 +65,11 @@ export default function PlayChatRoom() {
 const StyledChatBox = styled(Container)`
   border: 1px solid gray;
   border-bottom: none;
-  height: 100%;
+  height: 85vh;
   overflow-y: scroll;
   width: 100%;
+  margin-top: 10px;
+  border-radius: 5px 5px 0 0;
 `;
 
 const StyledBox = styled(Box)`

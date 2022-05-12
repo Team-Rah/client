@@ -52,7 +52,7 @@ export default function ChatForm() {
         id='chat-input'
       />
       <StyledButton
-        variant='contained'
+        style={{color: "#9A8249" }}
         id='submitChat-button'
         endIcon={<SendIcon />}
         type='submit'
@@ -63,6 +63,7 @@ export default function ChatForm() {
 
 const Form = styled.form`
   border: 1px solid gray;
+  border-radius: 0 0 5px 5px;
   display: flex;
   justify-content: center;
   align-items: center;

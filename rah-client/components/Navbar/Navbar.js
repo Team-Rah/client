@@ -27,6 +27,8 @@ import LoginForm from '../LoginForm';
 import SignupForm from '../SignupForm';
 import { userState } from '../../_states/tokenState';
 import { useRecoilValue } from 'recoil';
+import LogoIcon from '../../public/anubis-bg.jpg';
+import Image from 'next/Image';
 
 const Navbar = () => {
   const userData = useRecoilValue(userState);
@@ -196,9 +198,10 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position='static'>
-        <Container maxWidth='xl'>
-          <Toolbar>
+      <AppBar position='static' style={{backgroundColor: 'black'}}>
+        <Container maxWidth='xl' style={{backgroundColor: 'black'}}>
+          <Toolbar style={{backgroundColor: 'black'}}>
+            <Image height="60" width="65" src={LogoIcon} alt="" />
             <Link href='/'>
               <Typography
                 variant='h6'
@@ -210,14 +213,14 @@ const Navbar = () => {
                   display: { xs: 'none', md: 'flex' },
                   fontFamily: 'monospace',
                   fontWeight: 700,
-                  letterSpacing: '.3rem',
+                  letterSpacing: '.2rem',
                   color: 'inherit',
                   textDecoration: 'none',
                 }}>
-                WEREWOLF
+                WRATH OF ANUBIS
               </Typography>
             </Link>
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }}}>
               <IconButton
                 size='large'
                 aria-label='account of current user'
@@ -279,7 +282,7 @@ const Navbar = () => {
                   color: 'inherit',
                   textDecoration: 'none',
                 }}>
-                WEREWOLF
+                WRATH OF ANUBIS
               </Typography>
             </Link>
             <Box

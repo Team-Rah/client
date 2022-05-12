@@ -1,36 +1,41 @@
 import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import {useRecoilValue} from 'recoil'
 import {userState} from '../_states/tokenState'
 import {useRouter} from 'next/router'
+
 const columns = [
   {
     field: 'creatorName',
-    headerName: 'Creator',
+    headerName: 'CREATOR',
     type: 'string',
-    width: 150,
+    width: 170,
     editable: false,
+    headerAlign: 'center',
   },
   {
     field: 'gameName',
-    headerName: 'Game Name',
+    headerName: 'GAME NAME',
     type: 'string',
-    width: 200,
+    width: 170,
     editable: false,
+    headerAlign: 'center',
   },
   {
     field: 'playersNum',
-    headerName: 'Players',
+    headerName: 'PLAYERS',
     type: 'number',
-    width: 100,
+    width: 170,
     editable: false,
+    headerAlign: 'center',
   },
   {
     field: 'createdAt',
-    headerName: 'Created at',
+    headerName: 'CREATED AT',
     type: 'string',
-    width: 150,
+    width: 170,
     editable: false,
+    headerAlign: 'center',
   },
 ];
 //{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
@@ -52,10 +57,13 @@ const onRowClick = (event) => {
 
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 350, width: '100%' }}>
       <DataGrid
+        density="compact"
         rows={rows}
         columns={columns}
+        disableColumnMenu={true}
+        disableColumnFilter={true}
         pageSize={5}
         rowsPerPageOptions={[5]}
         onRowClick={onRowClick}
