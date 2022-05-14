@@ -133,7 +133,7 @@ export default function SignupForm(props) {
               />
             </ImageContainer>
 
-            <ImageContainer name={'2'} className='avatar-container' onClick={(e) => handleImgClick(e)}>
+            <ImageContainer name={'2'} className='avatar-container' onClick={(e) => setImg(Icon2.src)}>
               <StyledImage name={'2'} src={Icon2.src} height='37' width='35' />
             </ImageContainer>
 
